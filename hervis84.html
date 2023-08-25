@@ -451,7 +451,7 @@
     firstLetters();
 
     let nfo = () => {
-      idF('info').innerHTML = ('HTML : ' + (document.body.innerHTML.length - document.scripts[0].innerHTML.length)) + '; &nbsp; &nbsp; ' + ('CSS : ' + document.head.innerHTML.length) + '; &nbsp; &nbsp; ' + ('JAVASCRIPT : ' + document.scripts[0].innerHTML.length) + ';';
+      idF('info').innerHTML = 'HTML: ' + eval(parseFloat(document.documentElement.outerHTML.length) - parseFloat(document.getElementsByTagName('STYLE')[0].innerHTML.length) - parseFloat(document.scripts[0].innerHTML.length)) + '; &nbsp; CSS: ' + document.getElementsByTagName('STYLE')[0].innerHTML.length + '; &nbsp; JAVASCRIPT: ' + document.scripts[0].innerHTML.length + ';';
     };
     nfo();
 
