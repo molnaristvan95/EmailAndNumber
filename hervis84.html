@@ -136,6 +136,11 @@
       letter-spacing: 1px;
     }
 
+    footer {
+      font-size: 12px;
+      text-align: center;
+    }
+
     @media (max-width:1024px) {
       * {
         font-size: 14px;
@@ -223,6 +228,7 @@
     <legend>Aruházak listája</legend>
     <section id="database">Lista..</section>
   </fieldset>
+  <footer id="info"></footer>
 
   <script type="text/javascript">
     const idF = (i) => {
@@ -444,9 +450,10 @@
     }
     firstLetters();
 
-    console.log('HTML : ' + (document.body.innerHTML.length - document.scripts[0].innerHTML.length));
-console.log('CSS : ' + document.head.innerHTML.length);
-console.log('JAVASCRIPT : ' + document.scripts[0].innerHTML.length);
+    let nfo = () => {
+      idF('info').innerHTML = ('HTML : ' + (document.body.innerHTML.length - document.scripts[0].innerHTML.length)) + '; &nbsp; &nbsp; ' + ('CSS : ' + document.head.innerHTML.length) + '; &nbsp; &nbsp; ' + ('JAVASCRIPT : ' + document.scripts[0].innerHTML.length) + ';';
+    };
+    nfo();
 
   </script>
 </body>
