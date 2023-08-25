@@ -444,6 +444,10 @@
     }
     firstLetters();
 
+    console.log('HTML : ' + (document.body.innerHTML.length - document.scripts[0].innerHTML.length));
+console.log('CSS : ' + document.head.innerHTML.length);
+console.log('JAVASCRIPT : ' + document.scripts[0].innerHTML.length);
+
   </script>
 </body>
 
