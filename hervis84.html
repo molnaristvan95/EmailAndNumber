@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Molnár István || Мельник Степан">
+  <meta name="keywords" content="">
+  <meta name="theme-color" content="#050">
+  <title>Hervis Call Email All</title>
+  <style rel="stylesheet" type="text/css">
+    *:root {
+      font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      color: #ffab;
+      transition: .2s linear all;
+    }
+
+    body#main {
+      margin: 0;
+      background: #000;
+    }
+
+    body#main::before {
+      content: 'Made: 2023.08.25.';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      font-size: 10px;
+    }
+
+    input,
+    button {
+      color: #000;
+      zoom: 2;
+    }
+
+    button {
+      margin-left: 2px;
+    }
+
+    input {
+      background: #333;
+      color: #ffab;
+    }
+
+    input:focus {
+      outline: yellow 1px solid;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 16px 0px 8px 0px;
+    }
+
+    body>fieldset:nth-of-type(1) {
+      margin-to: 16px;
+    }
+
+    #hungary {
+      background: linear-gradient(to bottom, #f006 27%, #fff6 33% 63%, #0f06 70%);
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    #database {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      grid-template-rows: auto auto auto auto auto;
+      font-size: 1.2rem;
+    }
+
+    #database>* {
+      border: 1px solid #9999;
+      margin: 8px;
+      position: relative;
+      height: 11vh;
+      padding: 4px;
+    }
+
+    #database * {
+      border-radius: 4px;
+    }
+
+    #database>*>*:nth-child(1) {
+      position: absolute;
+      right: 2px;
+      top: -3px;
+      zoom: 2;
+    }
+
+    #database>*>a {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      zoom: 1.5;
+      letter-spacing: 1px;
+    }
+
+    #database>*>a:hover {
+      background: #090;
+    }
+
+    #target>* {
+      border: 1px outset skyblue;
+      padding: 8px;
+      display: inline-block;
+    }
+
+    #target>*>* {
+      border-radius: 2px;
+      zoom: 1.5;
+    }
+
+    #target>*>a {
+      letter-spacing: 1.5px;
+    }
+
+    #target>*>a:hover {
+      background: pink;
+    }
+
+    article {
+      display: block;
+      margin: 8px auto;
+      width: 90%;
+      zoom: 1.5;
+    }
+
+    #mainLetters {
+      letter-spacing: 1px;
+    }
+
+    @media (max-width:1024px) {
+      * {
+        font-size: 14px;
+      }
+
+      input,
+      button {
+        zoom: 1;
+      }
+
+      input {
+        width: 70%;
+        font-size: 2rem;
+      }
+
+      #database {
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        font-size: 1rem;
+      }
+
+      #database>*>*:nth-child(1) {
+        zoom: 1.5;
+        background: black;
+      }
+
+      #database>*>a {
+        zoom: 1.3;
+        transform: scaleY(1.5);
+      }
+
+      #target>*>a {
+        letter-spacing: 1px;
+      }
+
+      #target>*>* {
+        zoom: 1;
+      }
+
+      button {
+        zoom: 1.3;
+        margin-top: 4px;
+      }
+
+      #target {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+      }
+
+      #target>*>* {
+        zoom: 1.3;
+      }
+
+      h1 {
+        font-size: 1.2rem;
+        margin: 16px 0px 8px 0px;
+      }
+
+      #hungary {
+        font-size: 2rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body id="main">
+  <h1 align="center">Minden <span id="hungary">HERVIS</span> egy helyen</h1>
+  <form>
+    <fieldset>
+      <legend>Áruház kereső</legend>
+      <label>Név:</label>
+      <input id="idinp" type="text" maxlength="16" ondblclick="this.value = '';">
+      <a target="_blank" href="https://www.hervis.hu/shop/store-finder/all-stores?page=1">Forrás</a>
+      <hr>
+      <section id="target">Találat:...</section>
+    </fieldset>
+  </form>
+  <article>Érvényes kezdőbetűk:
+    <br>
+    <span id="mainLetters"></span>
+  </article>
+  <fieldset>
+    <legend>Aruházak listája</legend>
+    <section id="database">Lista..</section>
+  </fieldset>
+
+  <script type="text/javascript">
+    const idF = (i) => {
+        return document.getElementById(i);
+      },
+      create = (e) => {
+        return document.createElement(e);
+      },
+      str = (s) => {
+        return document.createTextNode(s);
+      },
+      objHervis = {
+        "Sopron": [
+          "14",
+          "+36208238974"
+        ],
+        "Szombathely": [
+          "08",
+          "+36208238991"
+        ],
+        "Nagykanizsa": [
+          "27",
+          "+36208238997"
+        ],
+        "Györ Family Center": [
+          "26",
+          "+36208238999"
+        ],
+        "Győr": [
+          "07",
+          "+36208238977"
+        ],
+        "Veszprém": [
+          "31",
+          "+36204254758"
+        ],
+        "Siófok": [
+          "81",
+          "+36202178006"
+        ],
+        "Kaposvár": [
+          "50",
+          "+36208238964"
+        ],
+        "Tatabánya": [
+          "12",
+          "+36208238976"
+        ],
+        "Székesfehérvár": [
+          "10",
+          "+36208238996"
+        ],
+        "Pécs": [
+          "04",
+          "+36208238986"
+        ],
+        "Budapest Premier Outlet": [
+          "34",
+          "+36202263178"
+        ],
+        "Érd": [
+          "36",
+          "+36208238993"
+        ],
+        "Budapest Mammut": [
+          "02",
+          "+36208238984"
+        ],
+        "Etele Plaza": [
+          "41",
+          "+36203872588"
+        ],
+        "Budapest Westend Center": [
+          "32",
+          "+36202273703"
+        ],
+        "Budapest Corvin": [
+          "28",
+          "+36208238973"
+        ],
+        "Budapest Pólus Center": [
+          "40",
+          "+36203851567"
+        ],
+        "Budapest Shopmark": [
+          "01",
+          "+36208238983"
+        ],
+        "Budapest Árkád": [
+          "03",
+          "+36208238985"
+        ],
+        "Budapest Köki": [
+          "29",
+          "+36208238981"
+        ],
+        "Gödöllő": [
+          "24",
+          "+36208238970"
+        ],
+        "Kecskemét": [
+          "06",
+          "+36208238982"
+        ],
+        "Szolnok - Szolnok Plaza": [
+          "22",
+          "+36208238965"
+        ],
+        "Eger": [
+          "16",
+          "+36208238968"
+        ],
+        "Szeged Árkád": [
+          "11",
+          "+36205493687"
+        ],
+        "Miskolc Szinvapark": [
+          "13",
+          "+36208238975"
+        ],
+        "Miskolc-Park Center": [
+          "19",
+          "+36208238971"
+        ],
+        "M3 Outlet Polgár": [
+          "82",
+          "+36204060804"
+        ],
+        "Bekescsaba": [
+          "09",
+          "+36208238978"
+        ],
+        "Debrecen": [
+          "18",
+          "+36208238972"
+        ],
+        "Debrecen Fórum": [
+          "25",
+          "+36202491734"
+        ],
+        "Nyíregyháza - Korzó Center": [
+          "20",
+          "+36208238967"
+        ]
+      };
+
+    let gen = () => {
+      idF('database').innerHTML = '';
+      let len = Object.keys(objHervis).length;
+      for (let i = 0; i < len; i++) {
+        let frame = create('DIV'),
+          txt = str(Object.keys(objHervis)[i]);
+        frame.appendChild(txt);
+        idF('database').appendChild(frame);
+        let id = create('DIV'),
+          ins = str(Object.values(objHervis)[i][0]);
+        id.appendChild(ins);
+        frame.appendChild(id);
+        let cellPhone = create('A'),
+          num = str(Object.values(objHervis)[i][1]);
+        cellPhone.appendChild(num);
+        frame.appendChild(cellPhone);
+        cellPhone.href = 'tel:' + Object.values(objHervis)[i][1];
+      }
+    };
+    gen();
+
+    let patchForGyorWidth = () => {
+      let firstWidth = idF('database').children[0].offsetWidth,
+        atlag = eval((parseFloat(firstWidth) + parseFloat(idF('database').children[4].offsetWidth)) / 2);
+      idF('database').children[4].style.width = atlag + 'px';
+    }
+    //    patchForGyorWidth();
+    window.setTimeout(() => {
+      if (screen.width > 1024) {
+        patchForGyorWidth();
+      }
+    }, 1024);
+
+    let searchStore = () => {
+      idF('target').innerHTML = '';
+      let myValue = idF('idinp').value.substring(0, 1).toUpperCase() + idF('idinp').value.substring(1),
+        storeLen = idF('database').children.length;
+      for (let x = 0; x < storeLen; x++) {
+        if (idF('database').children[x].innerHTML.includes(myValue)) {
+          idF('target').innerHTML += idF('database').children[x].outerHTML;
+        }
+      }
+      if (idF('idinp').value.length == 0) {
+        idF('target').innerHTML = '';
+      }
+    }
+    //idF('idinp').addEventListener('keydown', searchStore);
+    window.setInterval(searchStore, 256);
+
+    let firstLetters = () => {
+      let letters = '';
+      for (let u = 0; u < idF('database').children.length; u++) {
+        if (letters.includes(idF('database').children[u].innerHTML.charAt(0))) {
+
+        } else {
+          letters += idF('database').children[u].innerHTML.charAt(0);
+        }
+      }
+      let arr = letters.split(''),
+        sorted = arr.sort(),
+        string = sorted.toString();
+      //idF('mainLetters').innerHTML += string;
+      for (let z = 0; z < sorted.length; z++) {
+        let btn = create('BUTTON'),
+          txt = str(sorted[z]);
+        btn.appendChild(txt);
+        btn.type = 'button';
+        btn.addEventListener('click', () => {
+          idF('idinp').value = btn.innerText;
+        });
+        idF('mainLetters').appendChild(btn);
+      }
+    }
+    firstLetters();
+
+  </script>
+</body>
+
+</html>
